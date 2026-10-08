@@ -1,0 +1,322 @@
+@import "tailwindcss";
+
+/*
+  Lawn Doctor design tokens
+  Palette family: Forest. Cool sage neutrals, one green accent (deep in light, bright in dark),
+  plus a single deliberate forest color block (guarantee + footer) that stays dark in both modes.
+  Radius rule: interactive controls are full pills, cards and media are 22px.
+*/
+
+:root {
+  --bg: #f2f5ee;
+  --surface: #fafcf7;
+  --surface-2: #e6ece0;
+  --ink: #0f1e16;
+  --ink-2: #47554c;
+  --ink-3: #66736a;
+  --line: #d3dbcd;
+  --accent: #1d7638;
+  --accent-hover: #175f2d;
+  --on-accent: #f5faf1;
+  --accent-soft: #d8ecd0;
+  --forest: #10291b;
+  --forest-2: #183a27;
+  --on-forest: #eef4e8;
+  --on-forest-2: #b3c6b6;
+  --lime: #c3ea70;
+  --star: #e8a317;
+  --danger: #b23a26;
+  --shadow: 18 40 26;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1611;
+    --surface: #121e17;
+    --surface-2: #1a2a20;
+    --ink: #e9f0e5;
+    --ink-2: #aab7ad;
+    --ink-3: #8a988e;
+    --line: #24372b;
+    --accent: #8fd662;
+    --accent-hover: #a5e27d;
+    --on-accent: #0b1a10;
+    --accent-soft: #1e3a26;
+    --forest: #143222;
+    --forest-2: #1b402c;
+    --on-forest: #eef4e8;
+    --on-forest-2: #b3c6b6;
+    --lime: #c3ea70;
+    --star: #f0b43a;
+  --danger: #ff8f7a;
+    --shadow: 0 0 0;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0d1611;
+  --surface: #121e17;
+  --surface-2: #1a2a20;
+  --ink: #e9f0e5;
+  --ink-2: #aab7ad;
+  --ink-3: #8a988e;
+  --line: #24372b;
+  --accent: #8fd662;
+  --accent-hover: #a5e27d;
+  --on-accent: #0b1a10;
+  --accent-soft: #1e3a26;
+  --forest: #143222;
+  --forest-2: #1b402c;
+  --on-forest: #eef4e8;
+  --on-forest-2: #b3c6b6;
+  --lime: #c3ea70;
+  --star: #f0b43a;
+  --danger: #ff8f7a;
+  --shadow: 0 0 0;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-forest: var(--forest);
+  --color-forest-2: var(--forest-2);
+  --color-on-forest: var(--on-forest);
+  --color-on-forest-2: var(--on-forest-2);
+  --color-lime: var(--lime);
+  --color-star: var(--star);
+  --color-danger: var(--danger);
+
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 22px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 88px;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .container-x {
+      padding-inline: 2rem;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+    padding: 0.95rem 1.5rem;
+    transition:
+      transform 0.2s var(--ease-out-expo),
+      background-color 0.2s,
+      color 0.2s,
+      border-color 0.2s,
+      box-shadow 0.3s;
+  }
+  .btn:active {
+    transform: translateY(1px) scale(0.985);
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--on-accent);
+    box-shadow: 0 10px 24px -14px rgb(var(--shadow) / 0.55);
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+  }
+  .btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--ink);
+    background: color-mix(in oklab, var(--surface) 70%, transparent);
+  }
+  .btn-ghost:hover {
+    border-color: var(--ink-3);
+  }
+  .btn-lime {
+    background: var(--lime);
+    color: #0e2316;
+  }
+  .btn-lime:hover {
+    background: #d3f28f;
+  }
+  .btn-forest-ghost {
+    border: 1px solid rgb(238 244 232 / 0.28);
+    color: var(--on-forest);
+  }
+  .btn-forest-ghost:hover {
+    border-color: rgb(238 244 232 / 0.6);
+  }
+
+  .field {
+    width: 100%;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    padding: 0.95rem 1.25rem;
+    font-size: 1rem;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
+  .field::placeholder {
+    color: var(--ink-3);
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 22%, transparent);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--danger);
+  }
+  textarea.field {
+    border-radius: 18px;
+    resize: vertical;
+  }
+
+  .label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+  }
+
+  .card {
+    border-radius: var(--radius-card);
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s var(--ease-out-expo);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+
+  .prose-lawn p {
+    color: var(--ink-2);
+    line-height: 1.75;
+    max-width: 65ch;
+  }
+  .prose-lawn p + p {
+    margin-top: 1rem;
+  }
+}
+
+/* Reviews marquee. Pauses on hover and stops entirely for reduced motion. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 60s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Grain overlay on fixed, non-scrolling layer only. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
