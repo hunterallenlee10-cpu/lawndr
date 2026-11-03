@@ -82,6 +82,12 @@ export function Footer() {
             ))}
           </ul>
         </div>
+        <p className="-mt-4 pb-24 text-xs text-on-forest-2 md:pb-8">
+          Website by{" "}
+          <a href="https://www.leeenterprisesunlimited.com/" target="_blank" rel="noopener" className="hover:text-on-forest">
+            Lee Enterprises Unlimited
+          </a>
+        </p>
       </div>
     </footer>
   );
